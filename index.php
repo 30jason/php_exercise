@@ -1,3 +1,20 @@
+
+<?php
+session_start();
+if(isset($_SESSION['login'])){
+    if($_SESSION['login']=='Yes'){
+        echo "<a href='logout.php'>登出系統</a>";
+    }else{
+        echo "非法進入系統";
+        exit();
+    }
+}else{
+    echo "非法進入系統";
+    exit();
+}
+?>
+
+
 <html>
 
 <head>
@@ -20,25 +37,28 @@
                     <p>第三天:飯店Buffet早餐->恆春阿伯綠豆饌->屏東海生館->快樂賦歸</p>
 </div>
 
-<form action='' method=''>
-請輸入姓名: <input type='text' required placeholder='必填'></br>
-請輸入電子信箱: <input type='email' required placeholder='必填'></br>
-請輸入手機號碼: <input type='tel' required placeholder='必填'></br>
-請選擇性別: <input type='radio' name='gender' required>男性 <input type='radio' name='gender'>女性</br>
-請選擇你的飲食: <input type='checkbox' required>素食 <input type='checkbox'>葷食</br>
-請選擇你的T-shirt尺寸: <select required>
+<form action="rinfo.php" method='post' enctype="multipart/form-data">
+請輸入姓名: <input type='text' name='uname' required placeholder='必填'></br>
+請輸入電子信箱: <input type='email' name='uemail'required placeholder='必填'></br>
+請輸入手機號碼: <input type='tel' name='utel' required placeholder='必填'></br>
+請選擇性別: <input type='radio' name='ugender' name='ugender' required value='1'>男性 <input type='radio' name='ugender' value='2'>女性</br>
+請選擇你的飲食: <input type='checkbox'  name='ufood[]' value='素'>素食 <input type='checkbox' name='ufood[]' value='葷'>葷食</br>
+請選擇你的T-shirt尺寸: <select name='usize' required>
                         <option>size</option>
                         <option>S</option>
                         <option>M</option>
                         <option>L</option>
                         <option>XL</option>
                     </select></br> 
-請選擇你的T-shirt顏色: <input type='color' required></br>   
-請選擇你的生日: <input type='date' required></br>
-請輸入你要的旅遊券張數: <input type='number' required placeholder='必填'></br>
+請選擇你的T-shirt顏色: <input type='color' name='ucolor' required></br>   
+請選擇你的生日: <input type='date' name='udate' required></br>
+請輸入你要的旅遊券張數: <input type='number' name='unumber' required placeholder='必填'></br>
+建議: <textarea rows='6' cols='40' name='ucomment' ></textarea></br>
+上傳檔案: <input type='file' ></br>
 <input type='submit'>
 
 </form>
+
 <div align='center'>
 男(單位:公分)
 <table border='1' width='30%'>
